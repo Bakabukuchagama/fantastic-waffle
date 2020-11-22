@@ -14,4 +14,6 @@ Question oneQuestion (Long id);
 void deleteQuestion (Long id);
 
 void addQuestion(Question question);
+
+Question updateQuestion(Long id, String quest);
 }

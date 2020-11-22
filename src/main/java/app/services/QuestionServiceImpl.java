@@ -36,4 +36,11 @@ rep.delete(oneQuestion(id));
     public void addQuestion(Question question) {
 rep.save(question);
     }
+
+    @Override
+    public Question updateQuestion(Long id, String quest) {
+        Question question = rep.findById(id).get();
+        question.setQuestion(quest);
+        return question;
+    }
 }

@@ -5,11 +5,12 @@ import app.enumerations.QuestionType;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
 public class Question {
-    public Question(String question, String author, QuestionDifficulty difficulty, QuestionType type, List<Answer> answer, Examine examine) {
+    public Question(String question, String author, QuestionDifficulty difficulty, QuestionType type, Set<QuestionToAnswer> answer, Examine examine) {
         this.question = question;
         this.author = author;
         this.difficulty = difficulty;
@@ -58,11 +59,11 @@ public class Question {
         this.type = type;
     }
 
-    public List<Answer> getAnswer() {
+    public Set<QuestionToAnswer> getAnswer() {
         return answer;
     }
 
-    public void setAnswer(List<Answer> answer) {
+    public void setAnswer(Set<QuestionToAnswer> answer) {
         this.answer = answer;
     }
 
@@ -92,7 +93,7 @@ public class Question {
     private QuestionType type;
 
     @OneToMany (mappedBy = "question", cascade = CascadeType.ALL)
-    private List<Answer> answer;
+    private Set<QuestionToAnswer> answer;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Examine examine;
