@@ -1,13 +1,12 @@
 package app.rests;
 
+import app.dto.QuestionDto;
 import app.entities.Question;
 import app.services.QuestionService;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ public class QuestionRest{
     @Autowired
     private QuestionService questionService;
 
-@PostMapping("/all")
+@GetMapping("/all")
     public List<String> allQuestions(){
     List<Question> questionList = questionService.viewQuestions();
     List<String> questions = new ArrayList<>();
@@ -36,7 +35,7 @@ public class QuestionRest{
     return question;
 }
 
-@PostMapping("/{id}")
+@DeleteMapping("/{id}")
     public void deleteQuestion(@PathVariable("id") Long id){
         questionService.deleteQuestion(id);
     }
@@ -44,6 +43,11 @@ public class QuestionRest{
     @PostMapping("/add")
     public void addQuestion(Question question){
         questionService.addQuestion(question);
+    }
+
+    @PutMapping("/{id}")
+    public  void updateQuestion(@PathVariable("id") Long id, @RequestBody QuestionDto questionDto){
+    questionService.updateQuestion(id, questionDto);
     }
 
 }

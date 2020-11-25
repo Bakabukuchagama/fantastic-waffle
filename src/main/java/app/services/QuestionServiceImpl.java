@@ -1,5 +1,6 @@
 package app.services;
 
+import app.dto.QuestionDto;
 import app.entities.Answer;
 import app.entities.Question;
 import app.repositories.QuestionRep;
@@ -38,9 +39,13 @@ rep.save(question);
     }
 
     @Override
-    public Question updateQuestion(Long id, String quest) {
+    public Question updateQuestion(Long id, QuestionDto questionDto) {
         Question question = rep.findById(id).get();
-        question.setQuestion(quest);
-        return question;
+        question.setQuestion(questionDto.getQuestion());
+        question.setDifficulty(questionDto.getDifficulty());
+        question.setType(questionDto.getType());
+        //      question.setQuestion(quest);
+        return rep.save(question);
+
     }
 }

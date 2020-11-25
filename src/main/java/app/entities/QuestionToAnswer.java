@@ -1,6 +1,6 @@
 package app.entities;
 
-import app.embedd.QuestionAnswerKey;
+import app.embedd.ExamineQuestionKey;
 
 import javax.persistence.*;
 
@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class QuestionToAnswer {
 
 @EmbeddedId
-    QuestionAnswerKey id;
+ExamineQuestionKey id;
 
     @ManyToOne
     @MapsId("questionId")
@@ -24,18 +24,18 @@ public class QuestionToAnswer {
     @Column
     Boolean is_True;
 
-    public QuestionToAnswer(QuestionAnswerKey id, Question question, Answer answer, Boolean is_True) {
+    public QuestionToAnswer(ExamineQuestionKey id, Question question, Answer answer, Boolean is_True) {
         this.id = id;
         this.question = question;
         this.answer = answer;
         this.is_True = is_True;
     }
 
-    public QuestionAnswerKey getId() {
+    public ExamineQuestionKey getId() {
         return id;
     }
 
-    public void setId(QuestionAnswerKey id) {
+    public void setId(ExamineQuestionKey id) {
         this.id = id;
     }
 

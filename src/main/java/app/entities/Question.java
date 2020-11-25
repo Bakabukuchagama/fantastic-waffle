@@ -1,5 +1,6 @@
 package app.entities;
 
+import app.embedd.ExamineQuestionKey;
 import app.enumerations.QuestionDifficulty;
 import app.enumerations.QuestionType;
 
@@ -10,13 +11,13 @@ import java.util.Set;
 @Entity
 @Table
 public class Question {
-    public Question(String question, String author, QuestionDifficulty difficulty, QuestionType type, Set<QuestionToAnswer> answer, Examine examine) {
+    public Question(String question, String author, QuestionDifficulty difficulty, QuestionType type, List<Answer> answer, Examine examine) {
         this.question = question;
         this.author = author;
         this.difficulty = difficulty;
         this.type = type;
         this.answer = answer;
-        this.examine = examine;
+       // this.examine = examine;
     }
 
     public Long getId() {
@@ -59,21 +60,29 @@ public class Question {
         this.type = type;
     }
 
-    public Set<QuestionToAnswer> getAnswer() {
+    public List<Answer> getAnswer() {
         return answer;
     }
 
-    public void setAnswer(Set<QuestionToAnswer> answer) {
+    public void setAnswer(List<Answer> answer) {
         this.answer = answer;
     }
 
-    public Examine getExamine() {
-        return examine;
+    public List<ExamineToQuestion> getExamineToQuestion() {
+        return examineToQuestion;
     }
 
-    public void setExamine(Examine examine) {
-        this.examine = examine;
+    public void setExamineToQuestion(List<ExamineToQuestion> examineToQuestion) {
+        this.examineToQuestion = examineToQuestion;
     }
+
+   // public Examine getExamine() {
+    //    return examine;
+    //}
+
+   // public void setExamine(Examine examine) {
+    //    this.examine = examine;
+    //}
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "question")
@@ -93,8 +102,10 @@ public class Question {
     private QuestionType type;
 
     @OneToMany (mappedBy = "question", cascade = CascadeType.ALL)
-    private Set<QuestionToAnswer> answer;
+    private List<Answer> answer;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Examine examine;
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
+    private List<ExamineToQuestion> examineToQuestion;
+
+
 }

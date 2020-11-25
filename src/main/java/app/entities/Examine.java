@@ -6,9 +6,9 @@ import java.util.List;
 @Entity
 @Table
 public class Examine {
-    public Examine(String name, List<Question> questions) {
+    public Examine(String name, List<ExamineToQuestion> examineToQuestions) {
         this.name = name;
-        this.questions = questions;
+        this.examineToQuestions = examineToQuestions;
     }
 
     public Long getId() {
@@ -27,12 +27,12 @@ public class Examine {
         this.name = name;
     }
 
-    public List<Question> getQuestions() {
-        return questions;
+    public List<ExamineToQuestion> getQuestions() {
+        return examineToQuestions;
     }
 
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
+    public void setQuestions(List<ExamineToQuestion> examineToQuestions) {
+        this.examineToQuestions = examineToQuestions;
     }
 
     @Id
@@ -40,10 +40,10 @@ public class Examine {
     @SequenceGenerator(name="examine", sequenceName = "seq_examine")
     private Long id;
 
-    @OneToMany (mappedBy = "examine", cascade = CascadeType.ALL)
+    @Column
     private String name;
 
-    @OneToMany (mappedBy = "examine", cascade = CascadeType.ALL)
-    List<Question> questions;
+    @OneToMany (mappedBy = "examine")
+    List<ExamineToQuestion> examineToQuestions;
 
 }

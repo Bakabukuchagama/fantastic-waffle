@@ -10,7 +10,7 @@ public class Answer {
 
     public Answer(String answer, Question question) {
         this.answer = answer;
-      //  this.question = question;
+        this.question = question;
     }
 
     public Long getId() {
@@ -29,13 +29,13 @@ public class Answer {
         this.answer = answer;
     }
 
-  //  public Question getQuestion() {
-   //     return question;
-   // }
+    public Question getQuestion() {
+        return question;
+    }
 
-   // public void setQuestion(Question question) {
- //       this.question = question;
-  //  }
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "answer")
@@ -45,9 +45,9 @@ public class Answer {
     @Column
     private String answer;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    private Question question;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Question question;
 
-    @OneToMany (mappedBy = "answer")
-    Set<QuestionToAnswer> questionToAnswer;
+//    @OneToMany (mappedBy = "answer")
+//    Set<QuestionToAnswer> questionToAnswer;
 }

@@ -1,6 +1,7 @@
 package app.services;
 
 
+import app.dto.QuestionDto;
 import app.entities.Question;
 
 import java.util.List;
@@ -15,5 +16,5 @@ void deleteQuestion (Long id);
 
 void addQuestion(Question question);
 
-Question updateQuestion(Long id, String quest);
+Question updateQuestion(Long id, QuestionDto questionDto);
 }
