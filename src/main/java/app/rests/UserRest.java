@@ -1,7 +1,6 @@
 package app.rests;
 
 import app.entities.User;
-import app.repositories.UserRep;
 import app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

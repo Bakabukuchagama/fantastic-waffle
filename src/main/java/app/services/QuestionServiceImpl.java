@@ -1,9 +1,8 @@
 package app.services;
 
 import app.dto.QuestionDto;
-import app.entities.Answer;
 import app.entities.Question;
-import app.repositories.QuestionRep;
+import app.repositories.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +14,7 @@ import java.util.Optional;
 public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
-    private QuestionRep rep;
+    private QuestionRepository rep;
 
     @Override
     public List<Question> viewQuestions() {
@@ -23,19 +22,19 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question oneQuestion(Long id) {
-        Optional<Question> question = rep.findById(id);
-        return question.get();
+    public Question oneQuestion(Long id) throws Exception {
+        Question question = rep.findById(id).orElseThrow(() -> new Exception("Вопрос не найден"));
+        return question;
     }
 
     @Override
-    public void deleteQuestion(Long id) {
-rep.delete(oneQuestion(id));
+    public void deleteQuestion(Long id) throws Exception {
+        rep.delete(oneQuestion(id));
     }
 
     @Override
     public void addQuestion(Question question) {
-rep.save(question);
+        rep.save(question);
     }
 
     @Override

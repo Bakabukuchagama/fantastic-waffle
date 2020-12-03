@@ -8,8 +8,11 @@ import java.util.Set;
 @Table
 public class Answer {
 
-    public Answer(String answer, Question question) {
+
+    public Answer(Long id, String answer, Boolean isRight, Question question) {
+        this.id = id;
         this.answer = answer;
+        this.isRight = isRight;
         this.question = question;
     }
 
@@ -45,8 +48,19 @@ public class Answer {
     @Column
     private String answer;
 
+    @Column
+    private Boolean isRight;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Question question;
+
+    public Boolean getRight() {
+        return isRight;
+    }
+
+    public void setRight(Boolean right) {
+        isRight = right;
+    }
 
 //    @OneToMany (mappedBy = "answer")
 //    Set<QuestionToAnswer> questionToAnswer;

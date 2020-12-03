@@ -1,17 +1,17 @@
 package app.services;
 
 import app.entities.User;
-import app.repositories.QuestionRep;
-import app.repositories.UserRep;
-import app.servlets.LoginServlet;
+import app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.security.auth.login.LoginException;
 
 @Component
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRep rep;
+    private UserRepository rep;
 
     @Override
     public void registration(User user) {
@@ -19,8 +19,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String authorization(User user) {
-        return null;
+    public String authorization(User user) throws Exception {
+        try{
+            User logUser = rep.findByLoginAndPassword(user.getLogin(), user.getPassword()).get();
+            return logUser.getRole().name();
+        }
+        catch (RuntimeException e){
+          throw new RuntimeException("Неправильный логи или пароль");
+        }
+    }
+    @Override
+    public User getUserByLogin(String login){
+        try {
+            User user = rep.findByLogin(login).get();
+            return user;
+        }
+        catch (RuntimeException e){
+            throw new RuntimeException("Неправильный логи");
+        }
     }
 
     @Override

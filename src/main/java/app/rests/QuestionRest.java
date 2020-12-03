@@ -29,18 +29,18 @@ public class QuestionRest{
     return questions;
 }
 
-@PostMapping("/{id}")
-    public Question oneQuestion(@PathVariable("id") Long id){
+@GetMapping("/{id}")
+    public Question oneQuestion(@PathVariable("id") Long id) throws Exception {
     Question question = questionService.oneQuestion(id);
     return question;
 }
 
 @DeleteMapping("/{id}")
-    public void deleteQuestion(@PathVariable("id") Long id){
+    public void deleteQuestion(@PathVariable("id") Long id) throws Exception {
         questionService.deleteQuestion(id);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public void addQuestion(Question question){
         questionService.addQuestion(question);
     }

@@ -1,8 +1,7 @@
 package app.services;
 
 import app.entities.Examine;
-import app.repositories.ExaminationRep;
-import app.repositories.QuestionRep;
+import app.repositories.ExaminationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +15,7 @@ import java.util.Set;
 public class ExaminationServiceImpl implements ExaminationService {
 
     @Autowired
-    private ExaminationRep rep;
+    private ExaminationRepository rep;
 
     @Override
     public Examine addExamine(Examine examine) {

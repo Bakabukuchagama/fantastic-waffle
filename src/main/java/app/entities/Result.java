@@ -14,14 +14,14 @@ public class Result {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Examine nameExamine;
+    private Examine examine;
 
     @Column
     private String result;
 
     public Result(User user, Examine nameExamine, String result) {
         this.user = user;
-        this.nameExamine = nameExamine;
+        this.examine = nameExamine;
         this.result = result;
     }
 
@@ -49,12 +49,12 @@ public class Result {
     public void setResult(String result) {
         this.result = result;
     }
-    public Examine getNameExamine() {
-        return nameExamine;
+    public Examine getExamine() {
+        return examine;
     }
 
-    public void setNameExamine(Examine nameExamine) {
-        this.nameExamine = nameExamine;
+    public void setExamine(Examine examine) {
+        this.examine = examine;
     }
 
 }

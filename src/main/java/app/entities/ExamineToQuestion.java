@@ -4,7 +4,7 @@ import app.embedd.ExamineQuestionKey;
 
 import javax.persistence.*;
 
-@Entity
+
 @Table
 public class ExamineToQuestion {
 

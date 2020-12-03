@@ -1,5 +1,7 @@
 package app.entities;
 
+import app.enumerations.UserRoleEnum;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -7,10 +9,13 @@ import java.util.List;
 @Table
 public class User {
 
-    public User(String login, String password, String name, List<Result> results) {
+
+    public User(Long id, String login, String password, String name, UserRoleEnum role, List<Result> results) {
+        this.id = id;
         this.login = login;
         this.password = password;
         this.name = name;
+        this.role = role;
         this.results = results;
     }
 
@@ -54,6 +59,15 @@ public class User {
         this.results = results;
     }
 
+    public UserRoleEnum getRole() {
+        return role;
+    }
+
+    public void setRole(UserRoleEnum role) {
+        this.role = role;
+    }
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user")
     @SequenceGenerator(name="user", sequenceName = "seq_user")
@@ -68,6 +82,12 @@ public class User {
     @Column
     private String name;
 
+    @Column
+    private UserRoleEnum role;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Result> results;
+
+
+
 }

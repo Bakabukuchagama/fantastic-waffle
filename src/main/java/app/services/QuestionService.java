@@ -10,9 +10,9 @@ public interface QuestionService {
 
 List<Question> viewQuestions();
 
-Question oneQuestion (Long id);
+Question oneQuestion (Long id) throws Exception;
 
-void deleteQuestion (Long id);
+void deleteQuestion (Long id) throws Exception;
 
 void addQuestion(Question question);
 

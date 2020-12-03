@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
         String roleString = req.getParameter("role");
         UserRoleEnum role = UserRoleEnum.valueOf(roleString);
         try {
-            if (login != null) {
+            if (login != null || user.getUserByLogin(login) != null) {
                 session.setAttribute("login", login);
                 session.setAttribute("password", password);
                 session.setAttribute("role", role);
